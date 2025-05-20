@@ -1,8 +1,8 @@
 # Главное меню PowerShell для запуска скриптов поддержки iiko
 
 $menu = @(
-    "1. Получить адрес сервера iiko (из config.xml)"
-    "2. Database4"
+    "1. Получить адрес сервера iiko (из config.xml)",
+    "2. Database4",
     "0. Выход"
 )
 
@@ -17,7 +17,6 @@ switch ($choice) {
             $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/scripts/get-iiko-server.ps1"
             Write-Host "`n[!] Загружаю скрипт get-iiko-server.ps1 с GitHub..." -ForegroundColor Yellow
 
-            # Корректная загрузка с кодировкой UTF-8 с BOM
             $utf8 = New-Object System.Text.UTF8Encoding $true
             $webClient = New-Object System.Net.WebClient
             $bytes = $webClient.DownloadData($scriptUrl)
