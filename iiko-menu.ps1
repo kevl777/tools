@@ -42,7 +42,7 @@ switch ($choice) {
     }
     '3' {
         Write-Host "`n[!] Загружаю скрипт скачивания FrontTools..."
-        $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/tools/soft/download-FrontTools.ps1"
+        $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/soft/download-FrontTools.ps1"
         try {
             $script = Invoke-WebRequest -Uri $scriptUrl -UseBasicParsing
             Invoke-Expression $script.Content
