@@ -2,6 +2,7 @@
 
 $menu = @(
     "1. Получить адрес сервера iiko (из config.xml)"
+    "2. Скачать и запустить файл с Яндекс.Диска"
     "0. Выход"
 )
 
@@ -17,6 +18,21 @@ switch ($choice) {
             Write-Host "`n[!] Загружаю скрипт get-iiko-server.ps1 с GitHub..." -ForegroundColor Yellow
 
             # Корректная загрузка с кодировкой UTF-8 с BOM
+            $utf8 = New-Object System.Text.UTF8Encoding $true
+            $webClient = New-Object System.Net.WebClient
+            $bytes = $webClient.DownloadData($scriptUrl)
+            $script = $utf8.GetString($bytes)
+
+            Invoke-Expression $script
+        } catch {
+            Write-Error "Не удалось загрузить или выполнить скрипт: $_"
+        }
+    }
+    '2' {
+        try {
+            $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/soft/run-yadisk-file.ps1"
+            Write-Host "`n[!] Загружаю скрипт run-yadisk-file.ps1 с GitHub..." -ForegroundColor Yellow
+
             $utf8 = New-Object System.Text.UTF8Encoding $true
             $webClient = New-Object System.Net.WebClient
             $bytes = $webClient.DownloadData($scriptUrl)
