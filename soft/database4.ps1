@@ -15,9 +15,9 @@ try {
     # Путь к папке "Загрузки" текущего пользователя
     $downloadsPath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads"
 
-    # Если папка "Downloads" не существует, создаём её
+    # Проверяем, что папка существует, если нет — создаем
     if (-not (Test-Path -Path $downloadsPath)) {
-        New-Item -Path $downloadsPath -ItemType Directory | Out-Null
+        New-Item -ItemType Directory -Path $downloadsPath | Out-Null
     }
 
     # Полный путь для сохранения файла
