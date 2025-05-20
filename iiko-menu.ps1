@@ -41,10 +41,9 @@ switch ($choice) {
         }
     }
     '3' {
+        Write-Host "`n[!] Загружаю скрипт скачивания FrontTools..." -ForegroundColor Yellow
+        $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/soft/download-FrontTools.ps1"
         try {
-            $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/soft/download-FrontTools.ps1"
-            Write-Host "`n[!] Загружаю скрипт download-FrontTools.ps1 с GitHub..." -ForegroundColor Yellow
-
             $utf8 = New-Object System.Text.UTF8Encoding $true
             $webClient = New-Object System.Net.WebClient
             $bytes = $webClient.DownloadData($scriptUrl)
