@@ -13,7 +13,7 @@ try {
     }
 
     # Путь к папке "Загрузки" текущего пользователя
-    $downloadsPath = [Environment]::GetFolderPath('Downloads')
+    $downloadsPath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads"
 
     # Полный путь для сохранения файла
     $savePath = Join-Path -Path $downloadsPath -ChildPath "database4.exe"
