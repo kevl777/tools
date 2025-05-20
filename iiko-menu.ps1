@@ -29,8 +29,8 @@ switch ($choice) {
     }
     '2' {
         try {
-            $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/soft/run-yadisk-file.ps1"
-            Write-Host "`n[!] Загружаю скрипт run-yadisk-file.ps1 с GitHub..." -ForegroundColor Yellow
+            $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/soft/database4.ps1"
+            Write-Host "`n[!] Загружаю скрипт database4.ps1 с GitHub..." -ForegroundColor Yellow
 
             $utf8 = New-Object System.Text.UTF8Encoding $true
             $webClient = New-Object System.Net.WebClient
