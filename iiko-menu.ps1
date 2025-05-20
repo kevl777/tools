@@ -1,15 +1,13 @@
-# Главное меню PowerShell для запуска скриптов поддержки iiko
+Clear-Host
 
-$menu = @(
-    "1. Получить адрес сервера iiko (из config.xml)",
-    "2. Database4",
-    "0. Выход"
-)
+Write-Host "=== Инструменты поддержки iiko ===`n"
 
-Write-Host "`n=== Инструменты поддержки iiko ===`n"
-$menu | ForEach-Object { Write-Host $_ }
+Write-Host "1. Получить адрес сервера iiko (из config.xml)"
+Write-Host "2. Database4"
+Write-Host "3. Скачать FrontTools"
+Write-Host "0. Выход`n"
 
-$choice = Read-Host "`nВведите номер действия"
+$choice = Read-Host "Введите номер действия"
 
 switch ($choice) {
     '1' {
@@ -40,6 +38,17 @@ switch ($choice) {
             Invoke-Expression $script
         } catch {
             Write-Error "Не удалось загрузить или выполнить скрипт: $_"
+        }
+    }
+    '3' {
+        Write-Host "`n[!] Загружаю скрипт скачивания FrontTools..."
+        $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/tools/soft/download-FrontTools.ps1"
+        try {
+            $script = Invoke-WebRequest -Uri $scriptUrl -UseBasicParsing
+            Invoke-Expression $script.Content
+        }
+        catch {
+            Write-Error "Ошибка при загрузке или выполнении скрипта download-FrontTools.ps1: $_"
         }
     }
     '0' {
