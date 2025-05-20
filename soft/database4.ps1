@@ -17,6 +17,7 @@ try {
 
     # Проверяем, что папка существует, если нет — создаем
     if (-not (Test-Path -Path $downloadsPath)) {
+        Write-Host "Папка Downloads не найдена, создаю..." -ForegroundColor Yellow
         New-Item -ItemType Directory -Path $downloadsPath | Out-Null
     }
 
