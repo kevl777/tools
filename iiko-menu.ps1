@@ -40,17 +40,23 @@ switch ($choice) {
             Write-Error "Не удалось загрузить или выполнить скрипт: $_"
         }
     }
-    '3' {
-        Write-Host "`n[!] Загружаю скрипт скачивания FrontTools..."
+'3' {
+    try {
         $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/soft/download-FrontTools.ps1"
-        try {
-            $script = Invoke-WebRequest -Uri $scriptUrl -UseBasicParsing
-            Invoke-Expression $script.Content
-        }
-        catch {
-            Write-Error "Ошибка при загрузке или выполнении скрипта download-FrontTools.ps1: $_"
-        }
+        Write-Host "`n[!] Загружаю скрипт download-FrontTools.ps1 с GitHub..." -ForegroundColor Yellow
+
+        $utf8 = New-Object System.Text.UTF8Encoding $true
+        $webClient = New-Object System.Net.WebClient
+        $bytes = $webClient.DownloadData($scriptUrl)
+        $script = $utf8.GetString($bytes)
+
+        Invoke-Expression $script
     }
+    catch {
+        Write-Error "Ошибка при загрузке или выполнении скрипта download-FrontTools.ps1: $_"
+    }
+}
+
     '0' {
         Write-Host "Выход..."
         exit
