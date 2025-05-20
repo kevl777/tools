@@ -1,7 +1,7 @@
 $path = "$env:APPDATA\iiko\cashserver\config.xml"
 
 if (!(Test-Path $path)) {
-    Write-Error "Файл не найден: $path"
+    Write-Error "Г”Г Г©Г« Г­ГҐ Г­Г Г©Г¤ГҐГ­: $path"
     exit 1
 }
 
@@ -10,10 +10,10 @@ try {
     $serverUrl = $config.config.serverUrl
 
     if ($serverUrl) {
-        Write-Host "Адрес сервера iiko: $serverUrl"
+        Write-Host "РђРґСЂРµСЃ СЃРµСЂРІРµСЂР° iiko: $serverUrl"
     } else {
-        Write-Warning "Не удалось найти <serverUrl> в config.xml"
+        Write-Warning "РќРµ РЅР°Р№РґРµРЅ <serverUrl> РІ config.xml"
     }
 } catch {
-    Write-Error "Ошибка чтения XML: $_"
+    Write-Error "ГЋГёГЁГЎГЄГ  Г·ГІГҐГ­ГЁГї XML: $_"
 }
