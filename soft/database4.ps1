@@ -15,6 +15,11 @@ try {
     # Путь к папке "Загрузки" текущего пользователя
     $downloadsPath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads"
 
+    # Если папка "Downloads" не существует, создаём её
+    if (-not (Test-Path -Path $downloadsPath)) {
+        New-Item -Path $downloadsPath -ItemType Directory | Out-Null
+    }
+
     # Полный путь для сохранения файла
     $savePath = Join-Path -Path $downloadsPath -ChildPath "database4.exe"
 
