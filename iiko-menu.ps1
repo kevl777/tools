@@ -2,7 +2,7 @@
 
 $menu = @(
     "1. Получить адрес сервера iiko (из config.xml)"
-    "2. Database4
+    "2. Database4"
     "0. Выход"
 )
 
