@@ -10,9 +10,9 @@ try {
     $serverUrl = $config.config.serverUrl
 
     if ($serverUrl) {
-        Write-Host "Адрес сервера iiko: $serverUrl"
+        Write-Host "Server addres iiko: $serverUrl"
     } else {
-        Write-Warning "Не найден <serverUrl> в config.xml"
+        Write-Warning "Not found <serverUrl> in config.xml"
     }
 } catch {
     Write-Error "Îøèáêà ÷òåíèÿ XML: $_"
