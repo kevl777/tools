@@ -6,6 +6,7 @@ Write-Host "1. Получить адрес сервера iiko (из config.xml)
 Write-Host "2. Скачать и запустить Database4"
 Write-Host "3. Скачать и запустить FrontTools"
 Write-Host "4. Служба iikoCard5POS"
+Write-Host "5. Скачать последнюю версию POS"
 Write-Host "0. Выход`n"
 
 $choice = Read-Host "Введите номер действия"
@@ -81,8 +82,8 @@ switch ($choice) {
     }
     '4' {
         try {
-            $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/scripts/card5POS.ps1"
-            Write-Host "`n[!] Загружаю скрипт card5POS.ps1 с GitHub..." -ForegroundColor Yellow
+            $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/scripts/card5POS"
+            Write-Host "`n[!] Загружаю скрипт card5POS с GitHub..." -ForegroundColor Yellow
 
             $utf8 = New-Object System.Text.UTF8Encoding $true
             $webClient = New-Object System.Net.WebClient
@@ -92,6 +93,25 @@ switch ($choice) {
             Invoke-Expression $script
         } catch {
             Write-Error "Не удалось загрузить или выполнить скрипт: $_"
+        }
+    }
+    '5' {
+        try {
+            $url = "https://iiko.biz/ru-RU/About/DownloadPosInstaller?useRc=False"
+            $downloadsPath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads"
+
+            if (-not (Test-Path -Path $downloadsPath)) {
+                New-Item -ItemType Directory -Path $downloadsPath | Out-Null
+            }
+
+            $savePath = Join-Path -Path $downloadsPath -ChildPath "iikoPOS.exe"
+
+            Write-Host "`n[!] Скачиваю последнюю версию POS в $savePath ..." -ForegroundColor Cyan
+            Invoke-WebRequest -Uri $url -OutFile $savePath
+
+            Write-Host "[+] POS успешно скачан: $savePath" -ForegroundColor Green
+        } catch {
+            Write-Error "Ошибка при скачивании POS: $_"
         }
     }
     '0' {
