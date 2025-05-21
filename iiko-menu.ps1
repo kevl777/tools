@@ -6,7 +6,7 @@ Write-Host "1. Получить адрес сервера iiko (из config.xml)
 Write-Host "2. Скачать и запустить Database4"
 Write-Host "3. Скачать и запустить FrontTools"
 Write-Host "4. Служба iikoCard5POS"
-Write-Host "5. Скачать последнюю версию POS"
+Write-Host "5. Скачать и запустить последнюю версию POS"
 Write-Host "0. Выход`n"
 
 $choice = Read-Host "Введите номер действия"
@@ -40,7 +40,6 @@ switch ($choice) {
             }
 
             $downloadsPath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads"
-
             if (-not (Test-Path -Path $downloadsPath)) {
                 New-Item -ItemType Directory -Path $downloadsPath | Out-Null
             }
@@ -52,7 +51,6 @@ switch ($choice) {
 
             Write-Host "[+] Файл сохранён: $savePath"
             Write-Host "[*] Запускаю файл..." -ForegroundColor Green
-
             Start-Process -FilePath $savePath -Wait
         } catch {
             Write-Error "Ошибка при скачивании или запуске: $_"
@@ -62,9 +60,7 @@ switch ($choice) {
         try {
             $url = "https://fronttools.iiko.it/FrontTools.exe"
             $downloadsPath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads"
-
             if (-not (Test-Path -Path $downloadsPath)) {
-                Write-Host "Папка Downloads не найдена, создаю..." -ForegroundColor Yellow
                 New-Item -ItemType Directory -Path $downloadsPath | Out-Null
             }
 
@@ -99,7 +95,6 @@ switch ($choice) {
         try {
             $url = "https://iiko.biz/ru-RU/About/DownloadPosInstaller?useRc=False"
             $downloadsPath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads"
-
             if (-not (Test-Path -Path $downloadsPath)) {
                 New-Item -ItemType Directory -Path $downloadsPath | Out-Null
             }
@@ -110,8 +105,10 @@ switch ($choice) {
             Invoke-WebRequest -Uri $url -OutFile $savePath
 
             Write-Host "[+] POS успешно скачан: $savePath" -ForegroundColor Green
+            Write-Host "[*] Запускаю iikoPOS.exe..." -ForegroundColor Green
+            Start-Process -FilePath $savePath -Wait
         } catch {
-            Write-Error "Ошибка при скачивании POS: $_"
+            Write-Error "Ошибка при скачивании или запуске POS: $_"
         }
     }
     '0' {
