@@ -79,13 +79,16 @@ switch ($choice) {
     '4' {
         try {
             $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/scripts/card5POS.ps1"
-            Write-Host "`n[!] Загружаю скрипт card5POS с GitHub..." -ForegroundColor Yellow
-
+            Write-Host "`n[!] Загружаю скрипт card5POS.ps1 с GitHub..." -ForegroundColor Yellow
+    
+            $response = Invoke-WebRequest -Uri $scriptUrl -UseBasicParsing -ErrorAction Stop
+            if ($response.StatusCode -ne 200) {
+                throw "Скрипт не найден (HTTP $($response.StatusCode))"
+            }
+    
             $utf8 = New-Object System.Text.UTF8Encoding $true
-            $webClient = New-Object System.Net.WebClient
-            $bytes = $webClient.DownloadData($scriptUrl)
-            $script = $utf8.GetString($bytes)
-
+            $script = $utf8.GetString($response.RawContentStream.ToArray())
+    
             Invoke-Expression $script
         } catch {
             Write-Error "Не удалось загрузить или выполнить скрипт: $_"
