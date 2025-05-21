@@ -78,7 +78,7 @@ switch ($choice) {
     }
     '4' {
         try {
-            $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/scripts/card5POS"
+            $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/scripts/card5POS.ps1"
             Write-Host "`n[!] Загружаю скрипт card5POS с GitHub..." -ForegroundColor Yellow
 
             $utf8 = New-Object System.Text.UTF8Encoding $true
