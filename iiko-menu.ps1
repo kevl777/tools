@@ -5,6 +5,7 @@ Write-Host "=== Инструменты поддержки iiko ===`n"
 Write-Host "1. Получить адрес сервера iiko (из config.xml)"
 Write-Host "2. Скачать и запустить Database4"
 Write-Host "3. Скачать и запустить FrontTools"
+Write-Host "4. Служба iikoCard5POS"
 Write-Host "0. Выход`n"
 
 $choice = Read-Host "Введите номер действия"
@@ -76,6 +77,21 @@ switch ($choice) {
             Start-Process -FilePath $savePath -Wait
         } catch {
             Write-Error "Ошибка при скачивании или запуске: $_"
+        }
+    }
+    '4' {
+        try {
+            $scriptUrl = "https://raw.githubusercontent.com/kevl777/tools/main/scripts/card5POS.ps1"
+            Write-Host "`n[!] Загружаю скрипт card5POS.ps1 с GitHub..." -ForegroundColor Yellow
+
+            $utf8 = New-Object System.Text.UTF8Encoding $true
+            $webClient = New-Object System.Net.WebClient
+            $bytes = $webClient.DownloadData($scriptUrl)
+            $script = $utf8.GetString($bytes)
+
+            Invoke-Expression $script
+        } catch {
+            Write-Error "Не удалось загрузить или выполнить скрипт: $_"
         }
     }
     '0' {
